@@ -1,0 +1,16 @@
+{
+  "name": "wanderlore",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "node server/index.js",
+    "build": "node scripts/build.js",
+    "quality": "node scripts/quality-gate.js",
+    "test": "node --test && npm run quality",
+    "size": "npm run build && du -sh dist api server web package.json vercel.json README.md .env.example .gitignore"
+  }
+}

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta name="description" content="Wanderlore helps travelers discover destinations, hidden gems, heritage stories, local events, and cultural connections with live context-aware AI.">
+    <title>Wanderlore</title>
+    <link rel="stylesheet" href="/app.css">
+  </head>
+  <body>
+    <main class="shell">
+      <aside class="setup" aria-label="Trip setup">
+        <a class="skip-link" href="#results">Skip to results</a>
+        <div class="brand" aria-label="Wanderlore">
+          <span class="mark" aria-hidden="true">WL</span>
+          <div>
+            <p>Wanderlore</p>
+            <span>Context-aware cultural discovery</span>
+          </div>
+        </div>
+        <p class="problem-line">Generic travel lists miss weather, timing, trip stage, and local context. Wanderlore answers the challenge directly by recommending attractions, uncovering hidden gems, generating storytelling, promoting heritage, suggesting local events, and connecting visitors with authentic cultural experiences.</p>
+
+        <form id="setupForm" autocomplete="off" aria-describedby="setupHint">
+          <p id="setupHint" class="sr-only">Enter a city, choose trip details and at least one interest, then start exploring.</p>
+          <label>City
+            <input id="city" name="city" value="New Delhi" required minlength="2" maxlength="80">
+          </label>
+
+          <label>Trip length <span id="tripLengthText">4 days</span>
+            <input id="tripDaysTotal" name="tripDaysTotal" type="range" min="1" max="7" value="4">
+          </label>
+
+          <label>Current day <span id="tripDayText">2</span>
+            <input id="tripDay" name="tripDay" type="range" min="1" max="4" value="2">
+          </label>
+
+          <fieldset>
+            <legend>Interests</legend>
+            <div class="chips" id="interests"></div>
+          </fieldset>
+
+          <label>Budget
+            <select id="budget" name="budget">
+              <option value="free">Free</option>
+              <option value="$">$</option>
+              <option value="$$" selected>$$</option>
+              <option value="$$$">$$$</option>
+            </select>
+          </label>
+
+          <button class="primary" type="submit">Start exploring</button>
+        </form>
+
+        <section id="contextPanel" class="context-panel" aria-live="polite"></section>
+      </aside>
+
+      <section id="results" class="results" aria-live="polite">
+        <nav class="tabs" aria-label="Wanderlore sections" role="tablist">
+          <button id="tab-smart" data-tab="smart" class="active" aria-current="page" role="tab" aria-selected="true" aria-controls="view">Smart Picks</button>
+          <button id="tab-hidden" data-tab="hidden" disabled role="tab" aria-selected="false" aria-controls="view">Off Path</button>
+          <button id="tab-detail" data-tab="detail" disabled role="tab" aria-selected="false" aria-controls="view">Place Detail</button>
+          <button id="tab-events" data-tab="events" disabled role="tab" aria-selected="false" aria-controls="view">Happening Now</button>
+          <button id="tab-threads" data-tab="threads" disabled role="tab" aria-selected="false" aria-controls="view">Local Threads</button>
+          <button id="tab-passport" data-tab="passport" disabled role="tab" aria-selected="false" aria-controls="view">Passport</button>
+        </nav>
+        <div id="view" class="view" role="tabpanel" aria-live="polite" aria-labelledby="tab-smart"></div>
+      </section>
+    </main>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
