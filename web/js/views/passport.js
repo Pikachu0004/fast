@@ -7,6 +7,7 @@ const slots = [
   ["heritage", "Heritage"],
   ["story", "Story"],
   ["events", "Events"],
+  ["planner", "AI Planner"],
   ["threads", "Threads"]
 ];
 

@@ -6,6 +6,7 @@ import { renderEmpty } from "./views/common.js";
 import { renderPassport } from "./views/passport.js";
 import { renderSmart } from "./views/smart.js";
 import { renderThreads } from "./views/threads.js";
+import { renderPlanner } from "./views/planner.js";
 import { handleTabKeydown } from "./tabKeys.js";
 
 const renderers = {
@@ -13,6 +14,7 @@ const renderers = {
   hidden: renderHidden,
   detail: renderDetail,
   events: renderEvents,
+  planner: renderPlanner,
   threads: renderThreads,
   passport: renderPassport
 };

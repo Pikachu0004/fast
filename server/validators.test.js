@@ -13,15 +13,30 @@ test("validates and normalizes context input", () => {
     recentCategoriesShown: Array(20).fill("food")
   });
   assert.equal(result.city, "New Delhi");
+  assert.equal(result.origin, "Mumbai");
+  assert.equal(result.traveler, "solo");
   assert.deepEqual(result.interests, ["food", "art"]);
   assert.equal(result.timeOfDay, "16:30");
   assert.equal(result.recentCategoriesShown.length, 12);
+
+  const customResult = validateContext({
+    city: "New Delhi",
+    origin: "London",
+    traveler: "family",
+    tripDay: 1,
+    tripDaysTotal: 3,
+    interests: ["art"],
+    budget: "$$$"
+  });
+  assert.equal(customResult.origin, "London");
+  assert.equal(customResult.traveler, "family");
 });
 
 test("rejects malicious and invalid context input", () => {
   assert.throws(() => validateContext({ city: "../etc/passwd", tripDay: 8, tripDaysTotal: 1, interests: ["food"] }), /tripDay/);
   assert.throws(() => validateContext({ city: "Delhi", tripDay: 1, tripDaysTotal: 2, interests: ["<script>"] }), /Unsupported interest/);
   assert.throws(() => validateContext({ city: "Delhi", tripDay: 3, tripDaysTotal: 2, interests: ["food"] }), /greater/);
+  assert.throws(() => validateContext({ city: "Delhi", tripDay: 1, tripDaysTotal: 2, interests: ["food"], traveler: "invalid" }), /traveler/);
 });
 
 test("bounds place tags to prevent payload bloat", () => {

@@ -51,6 +51,19 @@ test("events route fails safely when Ticketmaster key is unavailable", async () 
   process.env.EVENTS_API_KEY = originalKey;
 });
 
+test("planner itinerary route resolves with structured flights, hotels, and plan", async () => {
+  const response = await invoke({
+    method: "POST",
+    url: "/api/planner/itinerary",
+    body: { city: "New Delhi", origin: "Mumbai", traveler: "romantic", tripDay: 1, tripDaysTotal: 3, interests: ["heritage", "food"], budget: "$$" }
+  });
+  assert.equal(response.status, 200);
+  assert.ok(response.body.flights);
+  assert.ok(response.body.hotels);
+  assert.ok(response.body.plan);
+  assert.equal(response.body.stamp, "planner");
+});
+
 function invoke({ method, url, headers = {}, body }) {
   const request = new PassThrough();
   request.method = method;

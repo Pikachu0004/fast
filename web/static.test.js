@@ -40,7 +40,7 @@ test("static app preserves security and accessible focus styles", async () => {
 });
 
 test("frontend modules keep one responsibility per screen", async () => {
-  const expected = ["challenge.js", "common.js", "detail.js", "events.js", "hidden.js", "passport.js", "smart.js", "threads.js"];
+  const expected = ["challenge.js", "common.js", "detail.js", "events.js", "hidden.js", "passport.js", "planner.js", "smart.js", "threads.js"];
   const views = await fs.readdir("web/js/views");
   assert.deepEqual(views.sort(), expected.sort());
 });

@@ -4,8 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#2b364c">
     <meta name="description" content="Wanderlore helps travelers discover destinations, hidden gems, heritage stories, local events, and cultural connections with live context-aware AI.">
-    <title>Wanderlore</title>
+    <title>Wanderlore — Context-Aware Cultural Discovery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Playfair+Display:wght@700;900&display=swap">
     <link rel="stylesheet" href="/app.css">
   </head>
   <body>
@@ -23,9 +27,35 @@
 
         <form id="setupForm" autocomplete="off" aria-describedby="setupHint">
           <p id="setupHint" class="sr-only">Enter a city, choose trip details and at least one interest, then start exploring.</p>
-          <label>City
-            <input id="city" name="city" value="New Delhi" required minlength="2" maxlength="80">
-          </label>
+
+          <div class="form-row">
+            <label>Destination City
+              <input id="city" name="city" value="New Delhi" required minlength="2" maxlength="80">
+            </label>
+            <label>Origin City
+              <input id="origin" name="origin" value="Mumbai" required minlength="2" maxlength="80">
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label>Traveler Style
+              <select id="traveler" name="traveler">
+                <option value="solo" selected>🎒 Solo</option>
+                <option value="romantic">💑 Romantic</option>
+                <option value="family">🏠 Family</option>
+                <option value="friends">🧑‍🤝‍🧑 Friends</option>
+              </select>
+            </label>
+            <label>Currency
+              <select id="currency" name="currency">
+                <option value="USD" selected>$ USD</option>
+                <option value="EUR">€ EUR</option>
+                <option value="GBP">£ GBP</option>
+                <option value="INR">₹ INR</option>
+                <option value="JPY">¥ JPY</option>
+              </select>
+            </label>
+          </div>
 
           <label>Trip length <span id="tripLengthText">4 days</span>
             <input id="tripDaysTotal" name="tripDaysTotal" type="range" min="1" max="7" value="4">
@@ -42,14 +72,14 @@
 
           <label>Budget
             <select id="budget" name="budget">
-              <option value="free">Free</option>
-              <option value="$">$</option>
-              <option value="$$" selected>$$</option>
-              <option value="$$$">$$$</option>
+              <option value="free">Free &amp; Low Cost</option>
+              <option value="$">Budget Friendly</option>
+              <option value="$$" selected>Moderate Comfort</option>
+              <option value="$$$">Luxury &amp; Premium</option>
             </select>
           </label>
 
-          <button class="primary" type="submit">Start exploring</button>
+          <button class="primary" type="submit">✦ Start Exploring</button>
         </form>
 
         <section id="contextPanel" class="context-panel" aria-live="polite"></section>
@@ -61,6 +91,7 @@
           <button id="tab-hidden" data-tab="hidden" disabled role="tab" aria-selected="false" aria-controls="view">Off Path</button>
           <button id="tab-detail" data-tab="detail" disabled role="tab" aria-selected="false" aria-controls="view">Place Detail</button>
           <button id="tab-events" data-tab="events" disabled role="tab" aria-selected="false" aria-controls="view">Happening Now</button>
+          <button id="tab-planner" data-tab="planner" disabled role="tab" aria-selected="false" aria-controls="view">AI Planner</button>
           <button id="tab-threads" data-tab="threads" disabled role="tab" aria-selected="false" aria-controls="view">Local Threads</button>
           <button id="tab-passport" data-tab="passport" disabled role="tab" aria-selected="false" aria-controls="view">Passport</button>
         </nav>

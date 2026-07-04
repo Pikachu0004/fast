@@ -1,9 +1,16 @@
 const INTERESTS = new Set(["food", "heritage", "art", "nature", "nightlife", "craft"]);
 const BUDGETS = new Set(["free", "$", "$$", "$$$"]);
+const TRAVELERS = new Set(["solo", "romantic", "family", "friends"]);
+const CURRENCIES = new Set(["USD", "EUR", "GBP", "INR", "JPY"]);
 
 export function validateContext(value) {
   assertObject(value, "Request body");
   const city = cleanText(value.city, 2, 80, "city");
+  const origin = value.origin === undefined ? "Mumbai" : cleanText(value.origin, 2, 80, "origin");
+  const traveler = value.traveler === undefined ? "solo" : cleanText(value.traveler, 2, 20, "traveler").toLowerCase();
+  if (!TRAVELERS.has(traveler)) badRequest("Unsupported traveler type");
+  const currency = value.currency === undefined ? "USD" : cleanText(value.currency, 3, 3, "currency").toUpperCase();
+  if (!CURRENCIES.has(currency)) badRequest("Unsupported currency");
   const tripDay = cleanInteger(value.tripDay, 1, 7, "tripDay");
   const tripDaysTotal = cleanInteger(value.tripDaysTotal, 1, 7, "tripDaysTotal");
   if (tripDay > tripDaysTotal) badRequest("tripDay cannot be greater than tripDaysTotal");
@@ -16,7 +23,7 @@ export function validateContext(value) {
   if (!BUDGETS.has(budget)) badRequest("Unsupported budget");
   const timeOfDay = value.timeOfDay === undefined ? undefined : cleanTimeOfDay(value.timeOfDay);
   const recentCategoriesShown = (value.recentCategoriesShown || []).slice(-12).map((item) => cleanText(item, 1, 30, "recent category"));
-  return { city, tripDay, tripDaysTotal, interests: [...new Set(interests)], budget, ...(timeOfDay ? { timeOfDay } : {}), recentCategoriesShown };
+  return { city, origin, traveler, currency, tripDay, tripDaysTotal, interests: [...new Set(interests)], budget, ...(timeOfDay ? { timeOfDay } : {}), recentCategoriesShown };
 }
 
 export function validatePlaceContext(value) {

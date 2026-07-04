@@ -28,6 +28,9 @@ export function readContext() {
   const selected = [...document.querySelectorAll("#interests button[aria-pressed='true']")];
   return {
     city: $("city").value,
+    origin: $("origin") ? $("origin").value : "Mumbai",
+    traveler: $("traveler") ? $("traveler").value : "solo",
+    currency: $("currency") ? $("currency").value : "USD",
     tripDay: Number($("tripDay").value),
     tripDaysTotal: Number($("tripDaysTotal").value),
     interests: selected.map((button) => button.dataset.value),

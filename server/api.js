@@ -13,6 +13,7 @@ import {
 import { healthPayload as getHealthPayload } from "./routes/health.js";
 import { heritageNote as getHeritageNote, storyMode as getStoryMode } from "./routes/content.js";
 import { smartPicks as getSmartPicks } from "./routes/smart.js";
+import { tripPlan as getTripPlan } from "./routes/planner.js";
 
 const postRoutes = new Map([
   ["/api/context/smart-picks", { handler: getSmartPicks, status: 200 }],
@@ -20,7 +21,8 @@ const postRoutes = new Map([
   ["/api/place/story", { handler: getStoryMode, status: 200 }],
   ["/api/events", { handler: getLocalEvents, status: 200 }],
   ["/api/threads/hosts", { handler: getThreadHosts, status: 200 }],
-  ["/api/threads/request", { handler: getConnectionRequest, status: 201 }]
+  ["/api/threads/request", { handler: getConnectionRequest, status: 201 }],
+  ["/api/planner/itinerary", { handler: getTripPlan, status: 200 }]
 ]);
 
 export async function handleApiRequest(request, response) {
